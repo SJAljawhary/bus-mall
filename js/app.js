@@ -81,22 +81,37 @@ function handelClicks(event) {
         lImgEl.removeEventListener('click', handelClicks);
         mImgEl.removeEventListener('click', handelClicks);
         rImgEl.removeEventListener('click', handelClicks);
+
+
+        let btnEl = document.getElementById('button');
+        let divEl = document.getElementById('container');
+        btnEl.addEventListener('click', function clicking() {
+
+            let ulEl = document.getElementById('results');
+            let liEl;
+            for (let i = 0; i < products.length; i++) {
+                liEl = document.createElement('li');
+                ulEl.appendChild(liEl);
+                liEl.textContent = `${products[i].productName} has ${products[i].views} views and has ${products[i].clicks} clicks.`
+
+                btnEl.removeEventListener('click', clicking);
+            }
+
+
+
+        })
     }
+    clicking();
 
-    let btnEl = document.getElementById('button');
-    let divEl = document.getElementById('container');
-    btnEl.addEventListener('click', function clicking() {
 
-        let ulEl = document.getElementById('results');
-        let liEl;
-        for (let i = 0; i < products.length; i++) {
-            liEl = document.createElement('li');
-            ulEl.appendChild(liEl);
-            liEl.textContent = `${products[i].productName} has ${products[i].views} views and has ${products[i].clicks} clicks.`
-        }
-    })
 
-    
+
+
+
+
 }
-       clicking();
+
+
+
+
 
