@@ -50,13 +50,39 @@ function generateImage() {
 
 
 
+function settingItems() {
+
+    let data = JSON.stringify(products);
+    console.log(data);
+    localStorage.setItem('products', data);
+
+}
+
+
+
+function gettingItems() {
+    let stringObj = localStorage.getItem('products');
+    let normalObj = JSON.parse(stringObj);
+    if (normalObj !== null) {
+        products = normalObj;
+    }
+    renderImg();
+
+}
+
+
+gettingItems();
+
+
+
+
 function renderImg() {
     leftImgIndex = generateImage();
     middleImgIndex = generateImage();
     rightImgIndex = generateImage();
 
 
-    while (leftImgIndex === rightImgIndex || leftImgIndex === middleImgIndex || rightImgIndex === middleImgIndex || threeImages.includes(leftImgIndex) || threeImages.includes(middleImgIndex) || threeImages.includes(rightImgIndex) ){
+    while (leftImgIndex === rightImgIndex || leftImgIndex === middleImgIndex || rightImgIndex === middleImgIndex || threeImages.includes(leftImgIndex) || threeImages.includes(middleImgIndex) || threeImages.includes(rightImgIndex)) {
         leftImgIndex = generateImage();
         rightImgIndex = generateImage();
         middleImgIndex = generateImage();
@@ -66,7 +92,6 @@ function renderImg() {
     threeImages[0] = leftImgIndex;
     threeImages[1] = middleImgIndex;
     threeImages[2] = rightImgIndex;
-
 
 
 
@@ -83,11 +108,11 @@ function renderImg() {
     products[rightImgIndex].views++;
 
 
- 
+
 
     attemptsEl.textContent = attempts;
 
-   
+
 
 }
 
@@ -110,12 +135,11 @@ function handelClicks(event) {
         } else if (event.target.id === 'rightImg') {
             products[rightImgIndex].clicks++;
         } else if (event.target.id === 'middleImg') {
-
             products[middleImgIndex].clicks++;
         }
         renderImg();
 
-   
+
 
     } else {
 
@@ -125,15 +149,16 @@ function handelClicks(event) {
 
 
         let btnEl = document.getElementById('button');
-        
 
-        btnEl.addEventListener('click', function clicking() 
+        settingItems();
 
-        {
+        btnEl.addEventListener('click', function clicking() {
 
-           
+
 
             let ulEl = document.getElementById('results');
+
+
             let liEl;
             for (let i = 0; i < products.length; i++) {
                 liEl = document.createElement('li');
@@ -143,14 +168,16 @@ function handelClicks(event) {
                 productsClicks.push(products[i].clicks);
                 productsViews.push(products[i].views);
 
+                console.log(productsClicks);
             }
+
             chartRender();
-            btnEl.removeEventListener('click', clicking); 
+            btnEl.removeEventListener('click', clicking);
 
 
 
 
-            }    )
+        })
 
     }
 }
@@ -199,12 +226,12 @@ function chartRender() {
 }
 
 
- 
 
 
 
-   
-   
+
+
+
 
 
 
