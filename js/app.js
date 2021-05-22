@@ -1,7 +1,5 @@
 'use strict';
 
-
-
 let attempts = 0;
 let maxAttempts = 25;
 let attemptsEl = document.getElementById('attempts');
@@ -23,8 +21,6 @@ let leftImgIndex;
 let middleImgIndex;
 let rightImgIndex;
 
-
-
 function ProductImage(productName) {
 
     this.productName = productName.split('.')[0];
@@ -37,7 +33,6 @@ function ProductImage(productName) {
 }
 
 
-
 for (let i = 0; i < productsImages.length; i++) {
     new ProductImage(productsImages[i]);
 }
@@ -48,8 +43,6 @@ function generateImage() {
 }
 
 
-
-
 function settingItems() {
 
     let data = JSON.stringify(products);
@@ -57,8 +50,6 @@ function settingItems() {
     localStorage.setItem('products', data);
 
 }
-
-
 
 function gettingItems() {
     let stringObj = localStorage.getItem('products');
@@ -70,11 +61,7 @@ function gettingItems() {
 
 }
 
-
 gettingItems();
-
-
-
 
 function renderImg() {
     leftImgIndex = generateImage();
@@ -94,7 +81,6 @@ function renderImg() {
     threeImages[2] = rightImgIndex;
 
 
-
     lImgEl.setAttribute('src', products[leftImgIndex].source);
     lImgEl.setAttribute('title', products[leftImgIndex].source);
     products[leftImgIndex].views++;
@@ -108,15 +94,8 @@ function renderImg() {
     products[rightImgIndex].views++;
 
 
-
-
     attemptsEl.textContent = attempts;
-
-
-
 }
-
-
 renderImg();
 
 lImgEl.addEventListener('click', handelClicks);
@@ -125,8 +104,6 @@ rImgEl.addEventListener('click', handelClicks);
 
 function handelClicks(event) {
     attempts++;
-
-
 
     if (attempts <= maxAttempts) {
         console.log(event.target.id)
@@ -139,14 +116,11 @@ function handelClicks(event) {
         }
         renderImg();
 
-
-
     } else {
 
         lImgEl.removeEventListener('click', handelClicks);
         mImgEl.removeEventListener('click', handelClicks);
         rImgEl.removeEventListener('click', handelClicks);
-
 
         let btnEl = document.getElementById('button');
 
@@ -155,10 +129,7 @@ function handelClicks(event) {
         btnEl.addEventListener('click', function clicking() {
 
 
-
             let ulEl = document.getElementById('results');
-
-
             let liEl;
             for (let i = 0; i < products.length; i++) {
                 liEl = document.createElement('li');
@@ -174,11 +145,7 @@ function handelClicks(event) {
             chartRender();
             btnEl.removeEventListener('click', clicking);
 
-
-
-
         })
-
     }
 }
 
@@ -220,9 +187,6 @@ function chartRender() {
             }
         }
     });
-
-
-
 }
 
 
